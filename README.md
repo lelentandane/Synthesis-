@@ -1,6 +1,5 @@
 # Synthesis
 
-![Tests](https://github.com/lelentandane/synthesis/actions/workflows/tests.yml/badge.svg)
 
 Synthesis is a concept graph that answers one question: **how are these two ideas connected?**
 
@@ -8,7 +7,7 @@ You add ideas from any field, link them with named relationships, and Synthesis 
 
 It is a Java 21 application with a JSON API, a SQLite database and a browser interface. There is no framework: routing, validation and error handling are all in the code you can read.
 
-![The demo graph](docs/screenshots/graph.png)
+![The demo graph](graph.png)
 
 ## What it does
 
@@ -18,7 +17,7 @@ It is a Java 21 application with a JSON API, a SQLite database and a browser int
 - The answer is written as sentences that follow the real direction of each relationship, for example: *Mercury retrograde invites Reflection. Reflection deepens Narrative identity. Narrative identity is expressed through Storytelling. Brand voice is built with Storytelling.*
 - The route is highlighted on the graph with numbered steps.
 
-![A route across disciplines](docs/screenshots/connect.png)
+![A route across disciplines](connect.png)
 
 **Understand the whole graph**
 
@@ -27,7 +26,7 @@ It is a Java 21 application with a JSON API, a SQLite database and a browser int
 - **Where disciplines meet:** how many relationships cross from one field into another.
 - **Clusters and orphans:** separate groups with no link between them, and concepts with no links at all.
 
-![Insights](docs/screenshots/insights.png)
+![Insights](insights.png)
 
 **Work with it**
 
