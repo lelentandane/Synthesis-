@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthesis | How are these ideas connected?</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#panel">Skip to the side panel</a>
+
+  <header class="site-header">
+    <div class="brand">
+      <h1 class="wordmark">Synthesis</h1>
+      <p class="tagline">How are these ideas connected?</p>
+    </div>
+    <nav class="data-actions" aria-label="Data">
+      <a class="button button-quiet" id="export" href="/api/export" download="synthesis-export.json">Export</a>
+      <button class="button button-quiet" id="import-button" type="button">Import</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </nav>
+  </header>
+
+  <main class="workspace">
+    <section class="stage" aria-label="Concept graph">
+      <canvas id="graph" role="img" aria-label="Graph of concepts and their links. The Concepts tab lists the same information as text."></canvas>
+
+      <div class="stage-top">
+        <label class="visually-hidden" for="search">Search concepts</label>
+        <input id="search" type="search" placeholder="Search concepts" autocomplete="off">
+      </div>
+
+      <ul class="legend" id="legend" aria-label="Disciplines. Select one to hide or show it."></ul>
+
+      <div class="zoom" role="group" aria-label="Zoom">
+        <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" id="zoom-out" aria-label="Zoom out">&minus;</button>
+        <button type="button" id="zoom-fit" aria-label="Fit graph to screen">Fit</button>
+      </div>
+
+      <p class="graph-hint" id="graph-hint">Drag to move. Scroll to zoom. Select a concept to explore it.</p>
+
+      <div class="empty" id="empty" hidden>
+        <h2>Start with a few ideas</h2>
+        <p>Add concepts from any field, link them, and Synthesis will show how they connect. Or load a ready-made graph to look around first.</p>
+        <div class="actions">
+          <button class="button" id="empty-demo" type="button">Load the demo graph</button>
+          <button class="button button-quiet" id="empty-add" type="button">Add a concept</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel" id="panel">
+      <div class="tabs" role="tablist" aria-label="Panel sections">
+        <button type="button" role="tab" id="tab-connect" aria-controls="view-connect" aria-selected="true">Connect</button>
+        <button type="button" role="tab" id="tab-concepts" aria-controls="view-concepts" aria-selected="false" tabindex="-1">Concepts <span class="count" id="concept-count">0</span></button>
+        <button type="button" role="tab" id="tab-insights" aria-controls="view-insights" aria-selected="false" tabindex="-1">Insights</button>
+      </div>
+
+      <!-- CONNECT -->
+      <div id="view-connect" role="tabpanel" aria-labelledby="tab-connect" class="view">
+        <form id="connect-form" class="connect-form" novalidate>
+          <div class="field">
+            <label for="from-select">From</label>
+            <select id="from-select"></select>
+          </div>
+          <button type="button" class="swap" id="swap" aria-label="Swap the two concepts">&#8645;</button>
+          <div class="field">
+            <label for="to-select">To</label>
+            <select id="to-select"></select>
+          </div>
+          <fieldset class="modes">
+            <legend class="visually-hidden">Which route to look for</legend>
+            <label class="mode"><input type="radio" name="mode" value="fewest" checked> <span>Fewest steps</span></label>
+            <label class="mode"><input type="radio" name="mode" value="strongest"> <span>Strongest links</span></label>
+          </fieldset>
+          <button class="button" type="submit">Find the connection</button>
+        </form>
+        <div id="path-result" class="path-result" aria-live="polite"></div>
+      </div>
+
+      <!-- CONCEPTS -->
+      <div id="view-concepts" role="tabpanel" aria-labelledby="tab-concepts" class="view" hidden>
+        <div class="view-actions">
+          <button class="button" type="button" id="new-concept">New concept</button>
+        </div>
+
+        <form id="concept-form" class="card" hidden novalidate>
+          <h2 id="concept-form-title">New concept</h2>
+          <div class="field">
+            <label for="concept-name">Name</label>
+            <input id="concept-name" type="text" maxlength="80" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="concept-discipline">Discipline</label>
+            <input id="concept-discipline" type="text" maxlength="40" list="discipline-options" autocomplete="off" required>
+            <datalist id="discipline-options"></datalist>
+          </div>
+          <div class="field">
+            <label for="concept-description">Description <span class="optional">optional</span></label>
+            <textarea id="concept-description" rows="3" maxlength="500"></textarea>
+          </div>
+          <p class="form-error" id="concept-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="button" type="submit" id="concept-save">Save concept</button>
+            <button class="button button-quiet" type="button" id="concept-cancel">Cancel</button>
+          </div>
+        </form>
+
+        <div id="detail" class="card detail" hidden></div>
+
+        <p class="empty-text" id="list-note" hidden></p>
+        <div id="concept-list" class="concept-list"></div>
+      </div>
+
+      <!-- INSIGHTS -->
+      <div id="view-insights" role="tabpanel" aria-labelledby="tab-insights" class="view" hidden>
+        <div id="insights"></div>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/js/app.js"></script>
+</body>
+</html>
