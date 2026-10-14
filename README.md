@@ -1,5 +1,6 @@
 # Synthesis
 
+![Tests](https://github.com/lelentandane/synthesis/actions/workflows/tests.yml/badge.svg)
 
 Synthesis is a concept graph that answers one question: **how are these two ideas connected?**
 
@@ -7,7 +8,21 @@ You add ideas from any field, link them with named relationships, and Synthesis 
 
 It is a Java 21 application with a JSON API, a SQLite database and a browser interface. There is no framework: routing, validation and error handling are all in the code you can read.
 
-![The demo graph](graph.png)
+![The demo graph](docs/screenshots/graph.png)
+
+## The problem
+
+Note apps store ideas but do not tell you how two of them connect, or which connections are missing. Synthesis turns a set of ideas and named relationships into a graph, finds and explains the route between any two ideas, and points out the ideas that hold the graph together and the links that look like they should exist.
+
+**Built for:** students, researchers and writers who work across several fields and want to see how their ideas relate.
+
+## What this project demonstrates
+
+- **Data structures and algorithms in real use:** breadth-first search, Dijkstra's algorithm, Brandes' betweenness centrality and Jaccard similarity, each tested on small graphs with known answers.
+- **Java 21 without a framework:** the JDK's built-in HTTP server, routing, validation and JSON handling written by hand.
+- **Database design:** SQLite through JDBC with schema constraints, transactions, and an import that either fully succeeds or leaves the graph untouched.
+- **Web security basics:** JSON-only writes, request size limits, a static file whitelist, a strict Content-Security-Policy, and no HTML built from user text.
+- **Testing:** JUnit 5 tests from algorithm level up to the real HTTP API.
 
 ## What it does
 
@@ -17,7 +32,7 @@ It is a Java 21 application with a JSON API, a SQLite database and a browser int
 - The answer is written as sentences that follow the real direction of each relationship, for example: *Mercury retrograde invites Reflection. Reflection deepens Narrative identity. Narrative identity is expressed through Storytelling. Brand voice is built with Storytelling.*
 - The route is highlighted on the graph with numbered steps.
 
-![A route across disciplines](connect.png)
+![A route across disciplines](docs/screenshots/connect.png)
 
 **Understand the whole graph**
 
@@ -26,7 +41,7 @@ It is a Java 21 application with a JSON API, a SQLite database and a browser int
 - **Where disciplines meet:** how many relationships cross from one field into another.
 - **Clusters and orphans:** separate groups with no link between them, and concepts with no links at all.
 
-![Insights](insights.png)
+![Insights](docs/screenshots/insights.png)
 
 **Work with it**
 
@@ -116,6 +131,11 @@ pom.xml                      Maven build
 - Named graphs, so you can keep separate maps
 - Community detection to colour clusters automatically
 - Move the web layer to a framework such as Spring Boot, keeping the same service and graph code
+
+## Author
+
+**Sphelele Ntandane**
+[GitHub](https://github.com/Lelentandane) | [LinkedIn](https://www.linkedin.com/in/sphelele-ntandane-9a7178382)
 
 ## Licence
 
